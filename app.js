@@ -39,6 +39,11 @@ const swaggerOptions = {
 const swaggerDocs = swaggerJsDoc(swaggerOptions);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
+
+app.get('/', (req, res) => {
+    res.send('API de One Piece está funcionando!');
+});
+
 // Configurar rutas
 const itemRoutes = require('./routes/itemRoutes');
 app.use('/api/items', itemRoutes);
