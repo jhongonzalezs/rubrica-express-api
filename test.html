@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Prueba de WebSocket</title>
+</head>
+<body>
+    <h1>Conexión WebSocket</h1>
+    <button id="connectBtn">Conectar</button>
+    <div id="status"></div>
+
+    <script>
+        const connectBtn = document.getElementById('connectBtn');
+        const statusDiv = document.getElementById('status');
+
+        connectBtn.addEventListener('click', () => {
+            const socket = new WebSocket('ws://localhost:3000'); // URL de conexión al servidor WebSocket
+
+            socket.onopen = () => {
+                statusDiv.innerHTML = 'Conectado al servidor WebSocket';
+                console.log('Conectado al servidor WebSocket');
+            };
+
+            socket.onmessage = (event) => {
+                console.log('Mensaje del servidor:', event.data);
+                statusDiv.innerHTML += `<p>Mensaje recibido: ${event.data}</p>`;
+            };
+
+            socket.onerror = (error) => {
+                console.error('Error en WebSocket:', error);
+            };
+
+            socket.onclose = () => {
+                statusDiv.innerHTML = 'Conexión cerrada';
+                console.log('Conexión WebSocket cerrada');
+            };
+        });
+    </script>
+</body>
+</html>

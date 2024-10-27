@@ -12,8 +12,12 @@ const io = new Server(server); // Solo declaramos `io` una vez como servidor
 
 io.on('connection', (socket) => {
     console.log('Un cliente se ha conectado');
-    // Puedes agregar más eventos aquí.
+    socket.on('mensaje', (data) => {
+        console.log('Mensaje recibido:', data);
+        socket.emit('respuesta', 'Mensaje recibido en el servidor');
+    });
 });
+
 
 // Conectar a MongoDB
 mongoose.connect(process.env.MONGO_URI)
