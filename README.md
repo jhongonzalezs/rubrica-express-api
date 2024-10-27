@@ -34,7 +34,7 @@ Una vez le apareceran dos routes:
 
 
 
-##Validar WebSocket:
+#Validar WebSocket:
 1. Primero recuerde que debe estar corriendo node app.js
 2. Despues que este corriendo Ejecute el archivo node client.js en una consola diferente
 
