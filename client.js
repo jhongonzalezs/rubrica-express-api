@@ -1,22 +1,19 @@
 const WebSocket = require('ws');
-const PORT = process.env.PORT || 8080; // Asegúrate de que PORT se obtiene de process.env
+const ws = new WebSocket('wss://api-onepiece-6m7v.onrender.com');
 
-const server = require('http').createServer();
-const wss = new WebSocket.Server({ server });
-
-wss.on('connection', (ws) => {
-    console.log('Cliente conectado');
-    ws.send('Conexión establecida con el servidor');
-    
-    ws.on('message', (message) => {
-        console.log('Mensaje recibido:', message);
-    });
-
-    ws.on('close', () => {
-        console.log('Cliente desconectado');
-    });
+ws.on('open', () => {
+    console.log('Conexión WebSocket establecida');
+    ws.send('Mensaje de prueba');
 });
 
-server.listen(PORT, () => {
-    console.log(`Servidor WebSocket escuchando en el puerto ${PORT}`);
+ws.on('message', (data) => {
+    console.log('Mensaje recibido del servidor:', data);
+});
+
+ws.on('error', (error) => {
+    console.error('Error en WebSocket:', error);
+});
+
+ws.on('close', () => {
+    console.log('Conexión WebSocket cerrada');
 });
