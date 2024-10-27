@@ -1,6 +1,14 @@
 const express = require('express');
 const router = express.Router();
 const Personaje = require('../models/Personaje'); // Importa el modelo
+const { verifyToken } = require('../middleware/auth');
+
+
+
+// Ruta para obtener items
+router.get('/api/items', verifyToken, (req, res) => {
+    res.json({ message: 'Aquí están tus items!' });
+});
 
 /**
  * @swagger

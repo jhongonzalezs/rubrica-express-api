@@ -5,6 +5,7 @@ require('dotenv').config();
 const mongoose = require('mongoose');
 const swaggerJsDoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
+const { login, verifyToken } = require('./middleware/auth'); // Importa auth.js
 
 const app = express();
 const server = http.createServer(app); // Crear el servidor HTTP
@@ -48,11 +49,12 @@ app.get('/', (req, res) => {
     res.send('API de One Piece está funcionando!');
 });
 
+// Ruta para autenticación
+app.post('/api/login', login, verifyToken);
+
 // Configurar rutas
 const itemRoutes = require('./routes/itemRoutes');
-const testweb = require('./client');
-app.use('/api/items', itemRoutes);
-app.use('/api/websocket', testweb);
+app.use('/api/items', verifyToken, itemRoutes);
 
 // No necesitas conectar como cliente Socket.IO aquí
 // socket.on('connect', () => {
