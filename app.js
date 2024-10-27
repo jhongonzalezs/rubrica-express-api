@@ -50,7 +50,9 @@ app.get('/', (req, res) => {
 
 // Configurar rutas
 const itemRoutes = require('./routes/itemRoutes');
+const testweb = require('./client');
 app.use('/api/items', itemRoutes);
+app.use('/api/websocket', test.h);
 
 // No necesitas conectar como cliente Socket.IO aquí
 // socket.on('connect', () => {

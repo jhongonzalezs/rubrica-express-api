@@ -14,7 +14,7 @@
         const statusDiv = document.getElementById('status');
 
         connectBtn.addEventListener('click', () => {
-            const socket = new WebSocket('https://api-onepiece-6m7v.onrender.com'); // URL de conexión al servidor WebSocket
+            const socket = new WebSocket('wss://api-onepiece-6m7v.onrender.com'); // URL de conexión al servidor WebSocket
 
             socket.onopen = () => {
                 statusDiv.innerHTML = 'Conectado al servidor WebSocket';
