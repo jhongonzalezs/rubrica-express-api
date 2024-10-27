@@ -1,5 +1,5 @@
 const io = require('socket.io-client');
-const socket = io('https://api-onepiece-6m7v.onrender.com');
+const socket = io('http://localhost:3000');
 
 socket.on('connect', () => {
     console.log('Conectado al servidor');
