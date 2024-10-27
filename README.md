@@ -33,7 +33,13 @@ Una vez le apareceran dos routes:
 6. Si decea buscar un nombre que se encuentra seapara lo busca de la siguiente forma: http://localhost:3000/api/items/name/Nico%20Robin y si es un solo nombre es http://localhost:3000/api/items/name/Franky
 
 
+
 ##Validar WebSocket:
 1. Primero recuerde que debe estar corriendo node app.js
 2. Despues que este corriendo Ejecute el archivo node client.js en una consola diferente
 
+
+
+
+#Nota:
+Recuerda que  estos ejemplos son usando: http://localhost:3000/api/login en forma local de tu pc pero tambien lo puedes hacer de forma online usando el siguiente enlace:  https://api-onepiece-6m7v.onrender.com cabe recordar que funciona igual que el otro, solamente ahi que agregar el https://api-onepiece-6m7v.onrender.com/api/login para obtener el toker y validar
