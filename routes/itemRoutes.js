@@ -6,7 +6,8 @@ const { verifyToken } = require('../middleware/auth');
 
 
 // Ruta para obtener items
-router.get('/api/items', verifyToken, (req, res) => {
+router.get('/api/login', verifyToken, (req, res) => {
+    // Aquí va la lógica para obtener los items
     res.json({ message: 'Aquí están tus items!' });
 });
 
@@ -66,7 +67,7 @@ router.get('/api/items', verifyToken, (req, res) => {
  *       500:
  *         description: Error al crear el personaje
  */
-router.post('/', async (req, res) => {
+router.post('/', verifyToken, async (req, res) => {
     try {
         const { id, image, name, nickname, age, crew, rank, currentBounty } = req.body;
         
@@ -106,7 +107,7 @@ router.post('/', async (req, res) => {
  *       500:
  *         description: Error recuperando personajes
  */
-router.get('/', async (req, res) => {
+router.get('/', verifyToken,  async (req, res) => {
     try {
         const personajes = await Personaje.find();
         res.json(personajes);
@@ -140,7 +141,7 @@ router.get('/', async (req, res) => {
  *       500:
  *         description: Error recuperando personaje por ID
  */
-router.get('/id/:id', async (req, res) => {
+router.get('/id/:id', verifyToken, async (req, res) => {
     try {
         const personaje = await Personaje.findOne({ id: parseInt(req.params.id) });
         if (!personaje) return res.status(404).json({ message: 'Personaje no encontrado' });
@@ -205,7 +206,7 @@ router.get('/id/:id', async (req, res) => {
  *         description: Error recuperando personajes por nombre
  */
 
-router.get('/name/:name?', async (req, res) => {
+router.get('/name/:name?', verifyToken, async (req, res) => {
     try {
         const { name } = req.params;
         
@@ -286,7 +287,7 @@ router.get('/name/:name?', async (req, res) => {
  *       500:
  *         description: Error actualizando personaje
  */
-router.put('/:id', async (req, res) => {
+router.put('/:id', verifyToken, async (req, res) => {
     try {
         const personaje = await Personaje.findOneAndUpdate({ id: parseInt(req.params.id) }, req.body, { new: true });
         if (!personaje) return res.status(404).json({ message: 'Personaje no encontrado' });
@@ -317,7 +318,7 @@ router.put('/:id', async (req, res) => {
  *       500:
  *         description: Error eliminando personaje
  */
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', verifyToken, async (req, res) => {
     try {
         const personaje = await Personaje.findOneAndDelete({ id: parseInt(req.params.id) });
         if (!personaje) return res.status(404).json({ message: 'Personaje no encontrado' });
