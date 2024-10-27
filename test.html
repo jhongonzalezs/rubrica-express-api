@@ -5,7 +5,7 @@
     <title>Prueba de WebSocket</title>
 </head>
 <body>
-    <h1>Conexión WebSocket</h1>
+    <h1>Prueba de conexión WebSocket</h1>
     <button id="connectBtn">Conectar</button>
     <div id="status"></div>
 
@@ -14,7 +14,7 @@
         const statusDiv = document.getElementById('status');
 
         connectBtn.addEventListener('click', () => {
-            const socket = new WebSocket('https://api-onepiece-6m7v.onrender.com/'); // URL de conexión al servidor WebSocket
+            const socket = new WebSocket('wss://api-onepiece-6m7v.onrender.com'); // URL de conexión al servidor WebSocket
 
             socket.onopen = () => {
                 statusDiv.innerHTML = 'Conectado al servidor WebSocket';
@@ -28,6 +28,7 @@
 
             socket.onerror = (error) => {
                 console.error('Error en WebSocket:', error);
+                statusDiv.innerHTML = 'Error en WebSocket';
             };
 
             socket.onclose = () => {

@@ -1,12 +1,22 @@
-const io = require('socket.io-client');
-const socket = io('http://localhost:3000');
+const WebSocket = require('ws');
+const PORT = process.env.PORT || 8080; // Asegúrate de que PORT se obtiene de process.env
 
-socket.on('connect', () => {
-    console.log('Conectado al servidor');
-    socket.emit('mensaje', 'Hola desde el cliente');
+const server = require('http').createServer();
+const wss = new WebSocket.Server({ server });
+
+wss.on('connection', (ws) => {
+    console.log('Cliente conectado');
+    ws.send('Conexión establecida con el servidor');
+    
+    ws.on('message', (message) => {
+        console.log('Mensaje recibido:', message);
+    });
+
+    ws.on('close', () => {
+        console.log('Cliente desconectado');
+    });
 });
 
-socket.on('respuesta', (data) => {
-    console.log('Respuesta del servidor:', data);
-    socket.disconnect();
+server.listen(PORT, () => {
+    console.log(`Servidor WebSocket escuchando en el puerto ${PORT}`);
 });
